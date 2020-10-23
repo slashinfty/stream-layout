@@ -90,7 +90,7 @@ const consoleObject = [
         ]
     },
     {
-        "name": "sgb",
+        "name": "sgb2",
         "length": 17,
         "buttons": [
             {"button": "a", "input": 0},
