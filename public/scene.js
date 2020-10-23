@@ -150,4 +150,8 @@ const setLayout = async (console = null) => {
     // Twitch
     const twitch = document.getElementById('twitch');
     twitch.style.height = (680 - (parseFloat(getComputedStyle(nincid).height) + parseFloat(getComputedStyle(timer).height) + parseFloat(getComputedStyle(info).height))) + 'px';
+
+    // Racetime
+    const racetime = document.getElementById('racetime');
+    racetime.style.height = (680 - (parseFloat(getComputedStyle(nincid).height) + parseFloat(getComputedStyle(timer).height) + parseFloat(getComputedStyle(info).height))) + 'px';
 };

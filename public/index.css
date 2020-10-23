@@ -67,10 +67,11 @@ body {
     left: 10px;
     top: 250px;
     width: var(--left-width);
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto Mono', monospace;
     display: flex;
     justify-content: center;
-    font-size: 1.6em;
+    align-items: center;
+    font-size: 1.4em;
     color: rgba(106, 106, 106, 0.7);
     text-shadow: 2px 2px 7px rgba(0, 0, 0, 0.55);
 }
@@ -93,6 +94,9 @@ body {
     left: 10px;
     top: 250px;
     width: var(--left-width);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: 'Roboto', sans-serif;
     text-align: center;
     font-size: 1.8em;
@@ -100,9 +104,6 @@ body {
 
 #twitch p {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    margin: 0px;
     width: 100%;
     animation: fadeinout 6s linear forwards;
 }
