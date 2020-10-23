@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Stream Layout</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <!-- CSS -->
+    <link href="index.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@600&family=Roboto:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="background" class="keep" style="display: none;">
+        <div id="timer"></div>
+        <div id="info" class="keep">
+            <span class="blue">PB:</span> <span id="pb">N/A</span><br />
+            <span class="pink">WR:</span> <span id="wr">N/A</span>
+        </div>
+        <div id="twitch"></div>
+        <div id="racetime" class="keep">
+            <div id="left-rtgg"></div>
+            <div id="right-rtgg"></div>
+        </div>
+        <div id="nincid"></div>
+        <div id="gamefeed"></div>
+    </div>
+    <div id="settings" class="keep">
+        <p>
+            <label for="consoles">Console: </label>
+            <select id="consoles">
+                <option value="nes">NES</option>
+                <option value="snes">SNES</option>
+                <option value="sgb2" selected>SGB2</option>
+                <option value="n64">N64</option>
+                <option value="gcn">GCN</option>
+            </select>
+            <button id="load-console" onclick="setLayout(); loadPort();">Load Console</button>
+            <label for="port-select">Select Port: </label>
+            <select id="port-select"></select>
+            <button id="scan-button" onclick="scanPorts();">Scan Ports</button>
+            <label for="name">Twitch: </label>
+            <input type="text" id="name" />
+        </p>
+        <p>
+            <label for="game">Game: </label>
+            <input type="text" id="game" />
+            <label for="category">Category: </label>
+            <input type="text" id="category" />
+            <label for="subcategories">Subcategories: </label>
+            <input type="text" id="subcategories" />
+            <button id="srcQuery" onclick="srcLookup();">Find Info</button>
+        </p>
+        <p>
+            <input type="radio" name="middlebox" value="twitch" id="twitchRadio" checked="checked" onchange="radioCheck();" />
+            <label for="twitchRadio">Twitch Chat</label>
+            <input type="radio" name="middlebox" value="racetime" id="racetimeRadio" onchange="radioCheck();" />
+            <label for="racetimeRadio">Racetime: </label>
+            <input type="text" id="race" />
+        </p>
+        <p>
+            <button id="startTimer" onclick="start();">Start Timer</button>&nbsp;
+            <button id="pauseTimer" onclick="pause();">Pause Timer</button>&nbsp;
+            <button id="resetTimer" onclick="reset();">Reset Timer</button>&nbsp;
+            Start/Pause: \ &nbsp; Reset: `
+        </p>
+    </div>
+    <script src="nincid.js"></script>
+    <script src="racetime.js"></script>
+    <script src="scene.js"></script>
+    <script src="speedrun.js"></script>
+    <script src="timer.js"></script>
+    <script src="twitch.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+{
+  "name": "stream-layout",
+  "version": "1.0.0",
+  "description": "Electron app stream layout",
+  "main": "main/index.js",
+  "repository": "git@github.com:slashinfty/stream-layout.git",
+  "author": "Matt Braddock <matt.braddock@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "build-linux": "electron-builder -l",
+    "build-mac": "electron-builder -m",
+    "build-win": "electron-builder -w"
+  },
+  "dependencies": {
+    "@types/serialport": "^8.0.1",
+    "iso8601-duration": "^1.2.0",
+    "mousetrap": "^1.6.5",
+    "node-fetch": "^2.6.1",
+    "serialport": "^9.0.2",
+    "timeout-queue": "^1.0.3",
+    "twitch": "^4.2.7",
+    "twitch-auth": "^4.2.7",
+    "twitch-chat-client": "^4.2.7",
+    "upath": "^2.0.0"
+  },
+  "devDependencies": {
+    "electron": "^10.1.4",
+    "electron-builder": "^22.9.1",
+    "electron-rebuild": "^2.3.2"
+  },
+  "build": {
+    "appId": "com.electron.stream-layout",
+    "productName": "Stream Layout",
+    "npmRebuild": false,
+    "files": [
+      "node_modules/**/*",
+      "public/*",
+      "main/*",
+      "static/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "assets",
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon_256x256.png"
+    },
+    "mac": {
+      "category": "public.app-category.games",
+      "icon": "assets/icon_512x512.png",
+      "target": "dmg"
+    },
+    "linux": {
+      "category": "game",
+      "icon": "assets/icon_512x512.png",
+      "target": [
+        "deb",
+        "AppImage"
+      ]
+    }
+  }
+}
