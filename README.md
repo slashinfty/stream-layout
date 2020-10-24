@@ -30,6 +30,8 @@ yarn install
 yarn start
 ```
 
+There are commands for building this on your platform of choice. See `scripts` in the [package.json](https://github.com/slashinfty/stream-layout/blob/main/package.json).
+
 ## Notes on the Settings
 
 * You have to scan ports upon opening (it looks for a [NintendoSpy](https://github.com/jaburns/NintendoSpy) compatible device)
