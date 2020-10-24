@@ -1,8 +1,10 @@
 const skins = require('./skins.js');
 
+// For setting CSS variables
 const root = document.documentElement;
 
-const set = { //add racetime font size
+// Console specific DOM settings
+const set = {
     "sgb2": {
         "timer": {
             "minutes": '9.2em',

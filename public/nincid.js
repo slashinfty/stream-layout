@@ -3,6 +3,7 @@ const ByteLength = require('@serialport/parser-byte-length');
 
 var port;
 
+// Open a new port
 const loadPort = () => {
     if (port !== undefined) port.close();
     if (document.getElementById('port-select').value !== '') {
@@ -11,6 +12,7 @@ const loadPort = () => {
     }
 }
 
+// Decoding incoming data
 const consoleObject = [
     {
         "name": "nes",
@@ -105,6 +107,7 @@ const consoleObject = [
     }
 ];
 
+// Scan for ports with a device plugged in
 const scanPorts = () => {
     let PortOptions = new DocumentFragment();
     SerialPort.list().then(ports => {

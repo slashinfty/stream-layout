@@ -4,6 +4,7 @@ let startTime, updatedTime, difference, tInterval, savedTime;
 let paused = 0;
 let running = 0;
 
+// Set up hotkeys
 document.addEventListener("DOMContentLoaded", () => {
     Mousetrap.bind('\\', () => {
         if (!running){
@@ -22,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     Mousetrap.bind('`', reset, 'keyup');
 });
 
+// Change minutes/hours view on button change
 const timerRadioCheck = () => {
     const timerRadio = document.querySelector('input[name="timer-length"]:checked');
     const currentConsole = set[document.getElementById('consoles').value];
@@ -35,6 +37,7 @@ const timerRadioCheck = () => {
     }
 }
 
+// Start the timer
 const start = () => {
     if (!running) {
         startTime = new Date().getTime();
@@ -44,6 +47,7 @@ const start = () => {
     }
 };
 
+// Pause the timer
 const pause = () => {
     if (!difference) {}
     else if (!paused) {
@@ -56,6 +60,7 @@ const pause = () => {
     }
 };
 
+// Reset the timer
 const reset = () => {
     clearInterval(tInterval);
     savedTime = 0;
@@ -69,6 +74,7 @@ const reset = () => {
     }
 };
 
+// Display time
 const getShowTime = () => {
     updatedTime = new Date().getTime();
     if (savedTime) difference = (updatedTime - startTime) + savedTime;

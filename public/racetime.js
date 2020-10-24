@@ -2,9 +2,14 @@ const iso = require('iso8601-duration');
 const fetch = require('node-fetch');
 var rtggInterval;
 
+// Determine if showing race info or Twitch chat
 const middleRadioCheck = () => {
     const middleRadio = document.querySelector('input[name="middlebox"]:checked');
+
+    // Start monitoring race data
     if (middleRadio.value === 'racetime' && document.getElementById('race').value !== '') rtggInterval = setInterval(getRaceInfo, 10000);
+
+    // Stop monitoring race data
     else if (middleRadio.value === 'twitch') {
         clearInterval(rtggInterval);
         document.getElementById('left-rtgg').innerHTML = '';
@@ -13,6 +18,7 @@ const middleRadioCheck = () => {
 }
 
 const getRaceInfo = async () => {
+    // Convert seconds to a readable format
     const convert = time => {
         let hr, min, sec, ms;
         let parts = time.toString().split('.');
@@ -25,11 +31,14 @@ const getRaceInfo = async () => {
         else if (hr === undefined) return ms === undefined ? min.toString() + ':' + sec.toString() : min.toString() + ':' + sec.toString() + '.' + ms.toString();
         else return ms === undefined ? hr.toString() + ':' + min.toString() + ':' + sec.toString() : hr.toString() + ':' + min.toString() + ':' + sec.toString() + '.' + ms.toString();
     }
+
+    // Readable rank values
     const suffix = i => {
         let j = i % 10, k = i % 100;
         return j === 1 && k !== 11 ? i + 'st' : j === 2 && k !== 12 ? i + 'nd' : j === 3 && k !== 13 ? i + 'rd' : i + 'th';
     };
     
+    // Getting race information
     const raceUrl = document.getElementById('race').value;
     let entrants;
     try {
@@ -42,6 +51,8 @@ const getRaceInfo = async () => {
     }
     document.getElementById('left-rtgg').innerHTML = '';
     document.getElementById('right-rtgg').innerHTML = '';
+
+    // Getting user information
     entrants.forEach((e, i) => {
         let racerName = i === 0 ? e.user.name : '<br />' + e.user.name;
         let racerProgress = i === 0 ? '' : '<br />';

@@ -1,5 +1,4 @@
 const { app, BrowserWindow, shell } = require('electron');
-// const upath = require('upath');
 
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -18,11 +17,14 @@ const createWindow = () => {
 
     win.setMenu(null);
     win.loadFile('./public/index.html');
+    
+    // Links open in external browser
     win.webContents.on('new-window', (e, url) => {
         e.preventDefault();
         shell.openExternal(url);
     });
 
+    // Uncomment next line if you need to use dev console
     //win.webContents.openDevTools();
 }
 

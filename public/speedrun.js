@@ -1,4 +1,5 @@
 const srcLookup = async () => {
+    // Convert seconds to a readable format
     const convert = time => {
         let hr, min, sec, ms;
         let parts = time.toString().split('.');
@@ -12,6 +13,7 @@ const srcLookup = async () => {
         else return ms === undefined ? hr.toString() + ':' + min.toString() + ':' + sec.toString() : hr.toString() + ':' + min.toString() + ':' + sec.toString() + '.' + ms.toString();
     }
 
+    // Finding the game
     const gameAbbreviation = document.getElementById('game').value;
     const gameResponse = await fetch('https://www.speedrun.com/api/v1/games?abbreviation=' + gameAbbreviation + '&embed=categories');
     const gameObject = await gameResponse.json();
@@ -21,6 +23,8 @@ const srcLookup = async () => {
     }
     const foundGame = gameObject.data[0];
     const gameId = foundGame.id;
+
+    // Finding the category
     const categoryName = document.getElementById('category').value;
     const categoryObject = foundGame.categories.data.find(c => c.name.toLowerCase() === categoryName.toLowerCase());
     if (categoryObject === undefined) {
@@ -28,8 +32,11 @@ const srcLookup = async () => {
         return;
     }
     const categoryId = categoryObject.id;
+
+    // Find subcategories, if any
     const variablesResponse = await fetch(categoryObject.links.find(l => l.rel === 'variables').uri);
     const variablesObject = await variablesResponse.json();
+    // Create an array holding relevant subcategory data in a more manageable format
     const subcategoryArray = variablesObject.data.filter(v => v['is-subcategory'] === true).map(o => ({
         'id': o.id,
         'subcats': Object.entries(o.values.values).map(x => ({
@@ -39,7 +46,8 @@ const srcLookup = async () => {
     }));
     const subcategoryNames = document.getElementById('subcategories').value;
     let variablesQuery = '';
-    let subcategoryCollection = [];
+    let subcategoryCollection = []; 
+    // Go through each subcategory in input, and find correct values
     if (subcategoryNames !== '' && subcategoryNames !== undefined) {
         const subcategoryNameArray = subcategoryNames.split(';');
         subcategoryNameArray.forEach(subcategory => {
@@ -53,11 +61,14 @@ const srcLookup = async () => {
             variablesQuery += '&var-' + foundSubcategory.id + '=' + foundSubcategoryValue;
         });
     }
+
+    // Get the world record time
     const leaderboardResponse = await fetch('https://www.speedrun.com/api/v1/leaderboards/' + gameId + '/category/' + categoryId + '?top=1' + variablesQuery);
     const leaderboardObject = await leaderboardResponse.json();
     const wrSeconds = leaderboardObject.data.runs[0].run.times.primary_t;
     document.getElementById('wr').innerHTML = convert(wrSeconds);
     
+    // If Twitch name is present, find personal best
     const runnerName = document.getElementById('name').value;
     if (runnerName === '') {
         document.getElementById('pb').innerHTML = 'N/A';
@@ -85,6 +96,7 @@ const srcLookup = async () => {
             return;
         }
         else if (categoryRuns.length === 1) foundRun = categoryRuns[0];
+        // If there are subcategories, narrow down until 1 run remains
         else for (let i = 0; i < subcategoryCollection.length; i++) {
             categoryRuns = categoryRuns.filter(r => r.run.values[subcategoryCollection[i].key] === subcategoryCollection[i].val);
             if (categoryRuns.length === 0) {
