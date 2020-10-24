@@ -30,7 +30,7 @@ yarn start
 
 ## Notes on the Settings
 
-* You have to scan ports upon opening. It looks for a [NintendoSpy](https://github.com/jaburns/NintendoSpy) compatible device
+* You have to scan ports upon opening (it looks for a [NintendoSpy](https://github.com/jaburns/NintendoSpy) compatible device)
 * Twitch input should be your Twitch name (used for SRC lookup - requires you have your Twitch name registered on SRC)
 * SRC lookup is case-insensitive
     * Game input should be the abbreviation on SRC (like `sml2` for `https://www.speednrun.com/sml2`)
