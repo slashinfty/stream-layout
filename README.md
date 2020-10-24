@@ -27,3 +27,16 @@ yarn install
 # Start
 yarn start
 ```
+
+## Notes on the Settings
+
+* You have to scan ports upon opening. It looks for a [NintendoSpy](https://github.com/jaburns/NintendoSpy) compatible device
+* Twitch input should be your Twitch name (used for SRC lookup - requires you have your Twitch name registered on SRC)
+* SRC lookup is case-insensitive
+    * Game input should be the abbreviation on SRC (like `sml2` for `https://www.speednrun.com/sml2`)
+    * If there are multiple subcategories, they should be separated by semicolons
+* In order for Twitch chat to work, you need the keys located in [_tokens.json](https://github.com/slashinfty/stream-layout/blob/main/public/_tokens.json) (then rename the file as `tokens.json`)
+    * Directions for getting the keys are in the [Twitch Chat Client documentation](https://d-fischer.github.io/twitch-chat-client/docs/examples/basic-bot.html)
+* Racetime input should be the category and slug (like `sml2/good-atwodfive-8440` for `https://racetime.gg/sml2/good-atwodfive-8440`)
+* Timer hotkeys can be changed in [timer.js](https://github.com/slashinfty/stream-layout/blob/main/public/timer.js#L7-L23)
+    * The on-screen reminder can then be updated in [index.html](https://github.com/slashinfty/stream-layout/blob/main/public/index.html#L67)
