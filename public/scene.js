@@ -2,14 +2,18 @@ const skins = require('./skins.js');
 
 const root = document.documentElement;
 
-const set = {
+const set = { //add racetime font size
     "sgb2": {
         "timer": {
             "minutes": '9.2em',
-            "hours": '7em'
+            "hours": '7em',
+            "height": 160
         },
-        "info": {
-            "size": '1.3em'
+        "twitch": {
+            "font": '1.8em'
+        },
+        "racetime": {
+            "font": '1.4em'
         },
         "nincid": {
             "scale": 472 / 1080
@@ -21,82 +25,82 @@ const set = {
     },
     "nes": {
         "timer": {
-            
-        },
-        "info": {
-            
+            "minutes": '9.2em',
+            "hours": '7em',
+            "height": 160
         },
         "twitch": {
-            
+            "font": '1.8em'
         },
         "racetime": {
-            
+            "font": '1.4em'
         },
         "nincid": {
-            
+            "scale": 450 / 1080
         },
         "gamefeed": {
-            
+            "height": 700,
+            "width": 800
         }
     },
     "snes": {
         "timer": {
-            
-        },
-        "info": {
-            
+            "minutes": '9.2em',
+            "hours": '7em',
+            "height": 160
         },
         "twitch": {
-            
+            "font": '1.8em'
         },
         "racetime": {
-            
+            "font": '1.4em'
         },
         "nincid": {
-             
+             "scale": 450 / 981
         },
         "gamefeed": {
-            
+            "height": 700,
+            "width": 800
         }
     },
     "n64": {
         "timer": {
-            
-        },
-        "info": {
-            
+            "minutes": '6.6em',
+            "hours": '5em',
+            "height": 130
         },
         "twitch": {
-            
+            "font": '1.3em'
         },
         "racetime": {
-            
+            "font": '0.9em'
         },
         "nincid": {
-            
+            "scale": 317 / 981
         },
         "gamefeed": {
-            
+            "height": 700,
+            "width": 933
         }
     },
     "gcn": {
         "timer": {
-            
-        },
-        "info": {
-            
+            "minutes": '6.6em',
+            "hours": '5em',
+            "height": 130
         },
         "twitch": {
-            
+            "font": '1.3em'
         },
         "racetime": {
-            
+            "font": '0.9em'
         },
         "nincid": {
-             
+             "scale": 317 / 981
         },
         "gamefeed": {
-            
+            "height": 700,
+            "width": 933
         }
     }
 };
@@ -141,17 +145,21 @@ const setLayout = async (console = null) => {
     
     // Timer
     const timer = document.getElementById('timer');
-    timer.style.fontSize = set[console].timer.minutes; // depends
-    
+    timer.style.height = set[console].timer.height + 'px';
+    timer.style.lineHeight = getComputedStyle(timer).height;
+    timer.style.fontSize = document.querySelector('input[name="timer-length"]:checked').value === 'minutes' ? set[console].timer.minutes : set[console].timer.hours;
+
     // Info
     const info = document.getElementById('info');
-    info.style.fontSize = set[console].info.size;
+    info.style.top = (10 + parseFloat(getComputedStyle(timer).height)) + 'px';
     
     // Twitch
     const twitch = document.getElementById('twitch');
     twitch.style.height = (680 - (parseFloat(getComputedStyle(nincid).height) + parseFloat(getComputedStyle(timer).height) + parseFloat(getComputedStyle(info).height))) + 'px';
+    twitch.style.fontSize = set[console].twitch.font;
 
     // Racetime
     const racetime = document.getElementById('racetime');
     racetime.style.height = (680 - (parseFloat(getComputedStyle(nincid).height) + parseFloat(getComputedStyle(timer).height) + parseFloat(getComputedStyle(info).height))) + 'px';
+    racetime.style.fontSize = set[console].racetime.font;
 };

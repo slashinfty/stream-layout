@@ -23,7 +23,7 @@ const createWindow = () => {
         shell.openExternal(url);
     });
 
-    win.webContents.openDevTools();
+    //win.webContents.openDevTools();
 }
 
 app.allowRendererProcessReuse = false;

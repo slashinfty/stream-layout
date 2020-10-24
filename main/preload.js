@@ -1,11 +1,6 @@
 const SerialPort = require('serialport');
 
 document.addEventListener("DOMContentLoaded", () => {
-    scanPorts();
-
-    //const radios = document.querySelectorAll('input[name="middlebox"]');
-    //radios.forEach(radio => radio.addEventListener('change', radioCheck));
-
     let PortOptions = new DocumentFragment();
     SerialPort.list().then(ports => {
         ports.forEach(port => {

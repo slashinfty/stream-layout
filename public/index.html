@@ -50,11 +50,15 @@
             <button id="srcQuery" onclick="srcLookup();">Find Info</button>
         </p>
         <p>
-            <input type="radio" name="middlebox" value="twitch" id="twitchRadio" checked="checked" onchange="radioCheck();" />
+            <input type="radio" name="middlebox" value="twitch" id="twitchRadio" checked="checked" onchange="middleRadioCheck();" />
             <label for="twitchRadio">Twitch Chat</label>
-            <input type="radio" name="middlebox" value="racetime" id="racetimeRadio" onchange="radioCheck();" />
+            <input type="radio" name="middlebox" value="racetime" id="racetimeRadio" onchange="middleRadioCheck();" />
             <label for="racetimeRadio">Racetime: </label>
             <input type="text" id="race" />
+            <input type="radio" name="timer-length" value="minutes" id="minutesRadio" checked="checked" onchange="timerRadioCheck();" />
+            <label for="minutesRadio">Minutes</label>
+            <input type="radio" name="timer-length" value="hours" id="hoursRadio" onchange="timerRadioCheck();" />
+            <label for="hoursRadio">Hours</label>
         </p>
         <p>
             <button id="startTimer" onclick="start();">Start Timer</button>&nbsp;

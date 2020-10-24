@@ -2,10 +2,10 @@ const iso = require('iso8601-duration');
 const fetch = require('node-fetch');
 var rtggInterval;
 
-const radioCheck = () => {
-    const radio = document.querySelector('input[name="middlebox"]:checked');
-    if (radio.value === 'racetime' && document.getElementById('race').value !== '') rtggInterval = setInterval(getRaceInfo, 10000);
-    else if (radio.value === 'twitch') {
+const middleRadioCheck = () => {
+    const middleRadio = document.querySelector('input[name="middlebox"]:checked');
+    if (middleRadio.value === 'racetime' && document.getElementById('race').value !== '') rtggInterval = setInterval(getRaceInfo, 10000);
+    else if (middleRadio.value === 'twitch') {
         clearInterval(rtggInterval);
         document.getElementById('left-rtgg').innerHTML = '';
         document.getElementById('right-rtgg').innerHTML = '';
