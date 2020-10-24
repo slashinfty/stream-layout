@@ -136,7 +136,7 @@ const setLayout = async (console = null) => {
         const buttonID = button.name;
         buttonElement.setAttribute('id', buttonID);
         buttonElement.setAttribute('src', backPath + button.image);
-        const dim = button.hasOwnProperty('width') ? 'height:' + (button.height * scaleFactor) + 'px;width:' + (button.width * scaleFactor) + 'px;' : '';
+        const dim = button.hasOwnProperty('width') ? 'height:' + (button.height) + 'px;width:' + (button.width) + 'px;' : '';
         const vis = button.hasOwnProperty('range') ? 'visibility:visible;' : 'visibility:hidden;';
         buttonElement.setAttribute('style', 'left:' + (button.x * scaleFactor) + 'px;top:' + (button.y * scaleFactor) + 'px;' + vis + dim);
         buttons.appendChild(buttonElement);
