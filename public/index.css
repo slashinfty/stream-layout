@@ -9,6 +9,7 @@ body {
 
 #background {
     background-image: url('../static/background.jpg');
+    background-color: #000000;
     height: 720px;
     max-height: 720px;
     width: 1280px;
