@@ -35,11 +35,7 @@ class RaceRoom {
                 return;
             }
             if (data.type === 'race.data') {
-                /*const timerElement = document.getElementById("timer").innerHTML = '00:00';
-                const minutesView = document.querySelector('input[name="timer-length"]:checked').value === 'minutes';*/
                 if (data.race.status.value !== 'in_progress') {
-                    /*if (minutesView) timerElement.innerHTML = '00:00';
-                    else timerElement.innerHTML = '0:00:00';*/
                     document.getElementById("timer").innerHTML = '00:00';
                     if (data.race.status.value === 'finished' || data.race.status.value === 'cancelled') {
                         clearInterval(this.timer);
@@ -92,12 +88,10 @@ class RaceRoom {
             clearInterval(this.timer);
             document.getElementById('left-rtgg').innerHTML = '';
             document.getElementById('right-rtgg').innerHTML = '';
-            document.getElementById("timer").innerHTML = '00:00'
-            /*if (document.querySelector('input[name="timer-length"]:checked').value === 'minutes') {
-                document.getElementById("timer").innerHTML = '00:00'
-            } else {
-                document.getElementById("timer").innerHTML = '0:00:00';
-            }*/
+            timer.style.height = set[document.getElementById('consoles').value].timer.height + 'px';
+            timer.style.lineHeight = getComputedStyle(timer).height;
+            timer.style.fontSize = set[document.getElementById('consoles').value].timer.minutes;
+            timer.innerHTML = '00:00';
             room.connection.close();
         }
     }
@@ -122,11 +116,13 @@ class RaceRoom {
     updateTime(time) {
         const timerElement = document.getElementById("timer");
         let seconds = Math.floor((new Date(Date.now()) - new Date(time)) / 1000);
-        if (seconds >= 3600) timerElement.innerHTML = Math.floor(seconds / 3600) + ':' + ('0' + Math.floor(seconds / 60)).slice(-2) + ':' + ('0' + (seconds % 60)).slice(-2);
-        else if (seconds >= 0) timerElement.innerHTML = ('0' + Math.floor(seconds / 60)).slice(-2) + ':' + ('0' + (seconds % 60)).slice(-2);
+        if (seconds >= 3600) {
+            timerElement.style.height = set[document.getElementById('consoles').value].timer.height + 'px';
+            timerElement.style.lineHeight = getComputedStyle(timer).height;
+            timerElement.style.fontSize = set[document.getElementById('consoles').value].timer.hours;
+            timerElement.innerHTML = Math.floor(seconds / 3600) + ':' + ('0' + Math.floor((seconds % 3600) / 60)).slice(-2) + ':' + ('0' + (seconds % 60)).slice(-2);
+        } else if (seconds >= 0) timerElement.innerHTML = ('0' + Math.floor(seconds / 60)).slice(-2) + ':' + ('0' + (seconds % 60)).slice(-2);
         else timerElement.innerHTML = '00:00';
-        /*const minutesView = document.querySelector('input[name="timer-length"]:checked').value === 'minutes';
-        if (seconds >= 0) timerElement.innerHTML = minutesView ? ('0' + Math.floor(seconds / 60)).slice(-2) + ':' + ('0' + (seconds % 60)).slice(-2) : Math.floor(seconds / 3600) + ':' + ('0' + Math.floor(seconds / 60)).slice(-2) + ':' + ('0' + (seconds % 60)).slice(-2);*/
     }
 }
 

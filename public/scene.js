@@ -132,7 +132,7 @@ const setLayout = async (console = null) => {
     if (console === null) console = document.getElementById('consoles').value;
     // Clearing everything out
     const allDivs = [...document.querySelectorAll('div:not(.keep)')];
-    allDivs.forEach(d => d.innerHTML = d.id !== 'timer' ? '' : document.querySelector('input[name="timer-length"]:checked').value === 'minutes' ? '00:00' : '0:00:00');
+    allDivs.forEach(d => d.innerHTML = d.id !== 'timer' ? '' : '00:00');
     document.getElementById('background').style.display = 'block';
     
     // Placing game feed red block
@@ -169,7 +169,7 @@ const setLayout = async (console = null) => {
     const timer = document.getElementById('timer');
     timer.style.height = set[console].timer.height + 'px';
     timer.style.lineHeight = getComputedStyle(timer).height;
-    timer.style.fontSize = document.querySelector('input[name="timer-length"]:checked').value === 'minutes' ? set[console].timer.minutes : set[console].timer.hours;
+    timer.style.fontSize = set[console].timer.minutes;
 
     // Info
     const info = document.getElementById('info');

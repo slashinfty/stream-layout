@@ -3,7 +3,7 @@ A Node.js-based Electron app to use as a stream layout.
 
 ![example](assets/example.jpeg)
 
-Contains an embedded controller input display (NinCID), fading Twitch chat, timer with local hotkeys, personal best and world record queries from speedrun.com, and a racetime.gg race info display.
+Contains an embedded controller input display (NinCID), fading Twitch chat, timer with local hotkeys, personal best and world record queries from speedrun.com, and a racetime.gg race info display (which also controls the timer).
 
 Customizing the layout requires you to have some knowledge HTML, CSS, and JavaScript.
 
