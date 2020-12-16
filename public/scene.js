@@ -132,7 +132,7 @@ const setLayout = async (console = null) => {
     if (console === null) console = document.getElementById('consoles').value;
     // Clearing everything out
     const allDivs = [...document.querySelectorAll('div:not(.keep)')];
-    allDivs.forEach(d => d.innerHTML = d.id === 'timer' ? '00:00' : '');
+    allDivs.forEach(d => d.innerHTML = d.id !== 'timer' ? '' : document.querySelector('input[name="timer-length"]:checked').value === 'minutes' ? '00:00' : '0:00:00');
     document.getElementById('background').style.display = 'block';
     
     // Placing game feed red block

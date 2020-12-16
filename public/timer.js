@@ -7,6 +7,7 @@ let running = 0;
 // Set up hotkeys
 document.addEventListener("DOMContentLoaded", () => {
     Mousetrap.bind('\\', () => {
+        if (document.querySelector('input[name="middlebox"]:checked').value === 'racetime') return;
         if (!running){
             startTime = new Date().getTime();
             tInterval = setInterval(getShowTime, 1000);
@@ -20,7 +21,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }, 'keyup');
     
-    Mousetrap.bind('`', reset, 'keyup');
+    Mousetrap.bind('`', () => {
+        if (document.querySelector('input[name="middlebox"]:checked').value === 'racetime') return;
+        reset();
+    }, 'keyup');
 });
 
 // Change minutes/hours view on button change
@@ -80,6 +84,9 @@ const getShowTime = () => {
     if (savedTime) difference = (updatedTime - startTime) + savedTime;
     else difference =  updatedTime - startTime;
     var seconds = Math.floor(difference / 1000);
+    /*if (seconds >= 3600) {
+        
+    }*/
     let time;
     if (document.querySelector('input[name="timer-length"]:checked').value === 'minutes') {
         time = ('0' + Math.floor(seconds / 60)).slice(-2) + ':' + ('0' + (seconds % 60)).slice(-2);
