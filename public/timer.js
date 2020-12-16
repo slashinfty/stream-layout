@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Change minutes/hours view on button change
-const timerRadioCheck = () => {
+/*const timerRadioCheck = () => {
     const timerRadio = document.querySelector('input[name="timer-length"]:checked');
     const currentConsole = set[document.getElementById('consoles').value];
     document.getElementById('timer').style.fontSize = timerRadio.value === 'minutes' ? currentConsole.timer.minutes : currentConsole.timer.hours;
@@ -39,7 +39,7 @@ const timerRadioCheck = () => {
             document.getElementById("timer").innerHTML = '0:00:00';
         }
     }
-}
+}*/
 
 // Start the timer
 const start = () => {
@@ -71,11 +71,7 @@ const reset = () => {
     difference = 0;
     paused = 0;
     running = 0;
-    if (document.querySelector('input[name="timer-length"]:checked').value === 'minutes') {
-        document.getElementById("timer").innerHTML = '00:00'
-    } else {
-        document.getElementById("timer").innerHTML = '0:00:00';
-    }
+    document.getElementById("timer").innerHTML = '00:00'
 };
 
 // Display time
@@ -84,14 +80,15 @@ const getShowTime = () => {
     if (savedTime) difference = (updatedTime - startTime) + savedTime;
     else difference =  updatedTime - startTime;
     var seconds = Math.floor(difference / 1000);
-    /*if (seconds >= 3600) {
-        
-    }*/
     let time;
-    if (document.querySelector('input[name="timer-length"]:checked').value === 'minutes') {
-        time = ('0' + Math.floor(seconds / 60)).slice(-2) + ':' + ('0' + (seconds % 60)).slice(-2);
-    } else {
+    if (seconds >= 3600) {
+        const timer = document.getElementById('timer');
+        timer.style.height = set[document.getElementById('consoles').value].timer.height + 'px';
+        timer.style.lineHeight = getComputedStyle(timer).height;
+        timer.style.fontSize = set[document.getElementById('consoles').value].timer.hours
         time = Math.floor(seconds / 3600) + ':' + ('0' + Math.floor(seconds / 60)).slice(-2) + ':' + ('0' + (seconds % 60)).slice(-2);
+    } else {
+        time = ('0' + Math.floor(seconds / 60)).slice(-2) + ':' + ('0' + (seconds % 60)).slice(-2);
     }
     document.getElementById("timer").innerHTML = time;
 }
