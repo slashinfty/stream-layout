@@ -127,14 +127,23 @@ class RaceRoom {
 }
 
 const getRace = async () => {
-    const raceUrl = document.getElementById('race').value;
-    try {
-        const racetimeResponse = await fetch('https://racetime.gg/' + raceUrl + '/data');
-        const racetimeObject = await racetimeResponse.json();
-        currentRace = new RaceRoom(racetimeObject.name, new URL(racetimeObject.websocket_url, 'wss://racetime.gg'));
-    } catch (error) {
-        console.error(error);
-        return;
+    const raceSearch = await fetch ('https://racetime.gg/races/data');
+    const races = await raceSearch.json();
+    if (races.races.length === 0) return;
+    else {
+        for (let i = 0; i < races.races.length; i++) {
+            const race = races.races[i];
+            const raceUrl = race.data_url;
+            const lookupSearch = await fetch (`https://racetime.gg${raceUrl}`);
+            const lookup = await lookupSearch.json();
+            console.log(lookup);
+            const found = lookup.entrants.find(e => e.user.name === document.getElementById('race').value);
+            console.log(found);
+            if (found !== undefined) {
+                currentRace = new RaceRoom(lookup.name, new URL(lookup.websocket_url, 'wss://racetime.gg'));
+                break;
+            }
+        }
     }
     document.getElementById('startTimer').disabled = true;
     document.getElementById('pauseTimer').disabled = true;
