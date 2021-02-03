@@ -41,6 +41,6 @@ There are commands for building this on your platform of choice. See `scripts` i
     * If there are multiple subcategories, they should be separated by semicolons
 * In order for Twitch chat to work, you need the keys located in [_tokens.json](https://github.com/slashinfty/stream-layout/blob/main/public/_tokens.json) (then rename the file as `tokens.json`)
     * Directions for getting the keys are in the [Twitch Chat Client documentation](https://d-fischer.github.io/twitch-chat-client/docs/examples/basic-bot.html)
-* Racetime input should be the category and slug (like `sml2/good-atwodfive-8440` for `https://racetime.gg/sml2/good-atwodfive-8440`)
+* Racetime input should be your username on racetime.gg
 * Timer hotkeys can be changed in [timer.js](https://github.com/slashinfty/stream-layout/blob/main/public/timer.js#L7-L24)
     * The on-screen reminder can then be updated in [index.html](https://github.com/slashinfty/stream-layout/blob/main/public/index.html#L70)
